@@ -8,12 +8,15 @@
 */  
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
+#include <errno.h>
 #include <time.h>
 #include <assert.h>
 
-#define FILE_NAME "hex.c"
-#define BUFFER_SIZE 10
+#define FILE_NAME "file.txt"
+#define BUFFER_SIZE 20
 #define NEW_LINE 10
 
 // GLOBAL
@@ -50,13 +53,17 @@ main(void)
 FILE *loadFile(const char *__restrict__ src)
 {
     FILE *tmp = fopen64(src, "rb+");
-    assert(tmp != NULL);
+    if(NULL == tmp)
+    {
+        fprintf(stderr, "load file error: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
     return tmp;
 }
 
 void readHex(FILE *__restrict__ file)
 {
-    int8_t buffer[BUFFER_SIZE];
+    uint8_t buffer[BUFFER_SIZE];
     size_t n;
 
     while((n = fread(&buffer, sizeof(int8_t), BUFFER_SIZE, file)) > 0)
@@ -68,7 +75,12 @@ void readHex(FILE *__restrict__ file)
         fprintf(stdout, "--> ");
         for(size_t i = 0; i < n; ++i)
         {
-            putchar(buffer[i]);
+            if(buffer[i] == 0)
+                putchar('.');
+            if(buffer[i] == 10)
+                putchar('.');
+            else
+                putchar(buffer[i]);
         }
         putchar(NEW_LINE);
     }
