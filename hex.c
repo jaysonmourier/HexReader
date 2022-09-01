@@ -36,7 +36,7 @@ void __attribute__((destructor)) __stop()
  * load a file from disk, lifts an exception in case of a problem.
 */ 
 FILE *loadFile(const char *__restrict__ src) __attribute__((nonnull (1)));
-void readHex(const FILE *__restrict__ file) __attribute__((nonnull (1)));
+void readHex(FILE *__restrict__ file) __attribute__((nonnull (1)));
 
 int
 main(void)
@@ -54,7 +54,7 @@ FILE *loadFile(const char *__restrict__ src)
     return tmp;
 }
 
-void readHex(const FILE *__restrict__ file)
+void readHex(FILE *__restrict__ file)
 {
     int8_t buffer[BUFFER_SIZE];
     size_t n;
