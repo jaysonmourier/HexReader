@@ -77,7 +77,7 @@ void readHex(FILE *__restrict__ file)
         {
             if(buffer[i] == 0)
                 putchar('.');
-            else if(buffer[i] == 10)
+            else if(buffer[i] == NEW_LINE)
                 putchar('.');
             else
                 putchar(buffer[i]);
