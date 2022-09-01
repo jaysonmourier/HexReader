@@ -1,3 +1,12 @@
+/**
+ * 
+ * Jayson Mourier - 2022
+ * jayson.mourier@parisnanterre.fr
+ * 
+ * Simple hex reader, nothing more. 
+ *
+*/  
+
 #include <stdio.h>
 #include <time.h>
 #include <assert.h>
