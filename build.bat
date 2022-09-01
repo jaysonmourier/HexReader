@@ -1,0 +1,1 @@
+gcc -std=c11 -Wall -Ofast hex.c -o bin/hex.exe
